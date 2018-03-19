@@ -30,6 +30,10 @@ void loop()
   {
     motorOnThenOffWithSpeed();
   }
+  else
+  {
+    analogWrite(motorPin, 0);
+  }
   delay(50);
 }
 
