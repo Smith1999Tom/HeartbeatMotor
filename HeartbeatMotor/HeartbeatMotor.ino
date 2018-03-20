@@ -3,7 +3,8 @@
 const int motorPin = 9;
 const int potPin = 2;
 const int buttonPin = 4;
-int potValue = 0;
+double potValue = 0;
+double Speed1 = 0;
 
 int buttonPreviousState = 0;
 int buttonCurrentState = 0;
@@ -34,18 +35,21 @@ void loop()
   {
     analogWrite(motorPin, 0);
   }
-  delay(50);
+  delay(10);
 }
 
 void motorOnThenOffWithSpeed()
 {
   potValue = analogRead(potPin);  //Get value(0-1024) of potentiometer
-  double Speed1 = (255)*(potValue/1024);  // between 0 (stopped) and 255 (full speed)
+  
+  Speed1 = (255)*(potValue/1024);  // between 0 (stopped) and 255 (full speed)
   
   sinY = fabs(sin(sinX * (pi/180)) );  //Sin function smooths out motor speed.
   sinX += 10;
+  
   Speed1 *= sinY; //Apply sin function to motor speed.
-  int Time1 = 500;  // milliseconds for speed 1
+  int Time1 = 300;  // milliseconds for speed 1
+  
   
   analogWrite(motorPin, Speed1);  // turns the motor On
   delay(Time1);                   // delay for onTime milliseconds
